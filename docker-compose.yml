@@ -1,0 +1,10 @@
+# Docker compose file
+
+version: '3.8'
+services:
+  vm:
+    build: .
+    environment:
+      - TERM=xterm-256color
+    volumes:
+      - .:/home/workspace

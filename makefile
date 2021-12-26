@@ -11,7 +11,7 @@ OBJS = $(addprefix $(OBJDIR), $(notdir $(SRCS:.c=.o)))
 # image properties
 IMGDIR = images/
 IMAGE = PongOS
-NUM_BLOCKS = 3000
+SIZE = 1500K
 
 # binaries
 BINS = $(OBJS:.o=.bin)
@@ -21,13 +21,10 @@ BINS = $(OBJS:.o=.bin)
 # runs the emulator with the desired drive
 all: clean $(IMGDIR)$(IMAGE).img
 
-# creates the final image file, filling NUM_BLOCKS blocks
-$(IMGDIR)$(IMAGE).img: $(OBJDIR)os-img
-	dd if=$^ of=$@ bs=512 count=$(NUM_BLOCKS)
-
-# creates intermediate image file
-$(OBJDIR)os-img : $(OBJDIR)boot.bin $(BINS)
+# creates the final image file, truncating to size
+$(IMGDIR)$(IMAGE).img : $(OBJDIR)boot.bin $(BINS)
 	cat $^ > $@
+	truncate -s $(SIZE) $@
 
 # creates binary files from compiled object files
 $(OBJDIR)%.bin : build/%.o
