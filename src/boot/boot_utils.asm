@@ -1,5 +1,5 @@
 ; Utility functions
-
+bits 16
 print_string:
     .loop:
         mov al, [bx]    ; moves character at bx to al
