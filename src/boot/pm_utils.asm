@@ -1,5 +1,5 @@
 ; utility functions in 32-bit protected mode
-bits 32
+[bits 32]
 VIDEO_MEMORY equ 0xb8000
 WHITE_ON_BLACK equ 0x0f
 
@@ -10,14 +10,14 @@ clear_display:
     mov bx, 0x7D0           ; set counter to number of pixels
     mov al, 0x00            ; write NULL at each location
     mov ah, WHITE_ON_BLACK  ; set write mode for each location
-    .loop
+    .loop:
         cmp bx, 0x0         ; if counter is 0, stop and end
         je .done            ; jump to end of loop
         mov [edx], eax      ; write to the next address in graphics
         add edx, 2          ; increment the address
         dec bx              ; decrement the counter
         jmp .loop           ; continue looping
-    .done
+    .done:
         popa                ; restore register values
         ret                 ; return
 

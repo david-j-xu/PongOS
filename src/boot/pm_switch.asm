@@ -1,5 +1,5 @@
 ; Switch to 32 bit protected mode
-bits 16
+[bits 16]
 pm_switch:
     cli                     ; prevent interrupts during switch
     lgdt [gdt_descriptor]   ; load global descriptor table
@@ -11,7 +11,7 @@ pm_switch:
     jmp CODE_SEG:pm_init    ; initialize once in protected mode
 
 
-bits 32                     ; now in protected mode
+[bits 32]                     ; now in protected mode
 pm_init:
     mov ax, DATA_SEG        ; set ax register to the data segment
     

@@ -1,5 +1,5 @@
 ; Defining and setting up the global descriptor table
-bits 16
+[bits 16]
 gdt_start:
 
 gdt_null:
