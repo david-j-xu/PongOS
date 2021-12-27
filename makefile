@@ -53,7 +53,6 @@ $(OBJDIR)kernel_linker.o: src/kernel/kernel_linker.asm
 # runs the os
 run: $(IMGDIR)$(IMAGE).img
 	qemu-system-i386 -drive format=raw,file=$^ \
-		-serial mon:stdio \
 		-monitor telnet:127.0.0.1:54321,server,nowait
 
 # Opens up a monitor

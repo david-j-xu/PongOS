@@ -2,11 +2,13 @@
 
 void main() {
     init_screen();
-    char* video_memory = (char*)0xA0000;
-    for (u_16t i = 0; i < SCREEN_SIZE; i++) {
-        video_memory[i] = COLOR(7, 7, 3);
-    }
-}
 
-void cli() { __asm__ volatile("cli"); }
-void sti() { __asm__ volatile("sti"); }
+    clear_screen(COLOR(0, 0, 0));
+
+    draw_string(50, 50, "Hello World!", WHITE);
+    draw_rectangle(10, 100, 20, 50, COLOR(7, 7, 2));
+    draw_circle(250, 140, 40, COLOR(7, 3, 3));
+    draw();
+
+    halt();
+}

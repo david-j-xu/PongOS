@@ -22,8 +22,6 @@ boot_main:
 %include "src/boot/boot_utils.asm"
 ; include global descriptor table definition
 %include "src/boot/gdt.asm"
-; include protected mode utility functions
-%include "src/boot/pm_utils.asm"
 ; include code allowing switch to protected mode
 %include "src/boot/pm_switch.asm"
 
@@ -33,29 +31,24 @@ KERNEL_LOC equ 0x1000       ; location of our kernel
 load_kernel:
     mov bx, KERNEL_LOAD_MESSAGE     ; Place status string
     call print_string               ; Print loading kernel message
-
     mov ax, 0x0                     ; set ax register to 0x00
     mov es, ax                      ; set es register to 0x00
     mov bx, KERNEL_LOC              ; set bx register to 0x1000
     mov dh, [LOAD_NUM_SECTORS]      ; set to load [LOAD_NUM_SECTORS] sectors
     mov dl, [BOOT_DRIVE]            ; set correct boot drive here
     call load_sectors               ; load the next sectors to ES:BX
-
     ret
 
 [bits 16]
 switch_to_pm:
     mov bx, PROTECTED_MODE_MESSAGE  ; Place status string
     call print_string               ; Print transition to 32 bit protected mode
-
     call switch_vga_mode            ; switch VGA mode to graphics
-
     call pm_switch                  ; initiate switch to 32 bit protected mode
     hlt
 
 [bits 32]
 kernel_execute:
-    ; call clear_display          ; clear VGA display
     call KERNEL_LOC             ; call into our kernel
     hlt                         ; hang if error occurred
 

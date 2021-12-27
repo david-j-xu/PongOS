@@ -13,7 +13,10 @@
 
 #define COLOR(r, g, b) ((u_8t)((((r)&7) << 5) | (((g)&7) << 2) | (((b)&3))))
 
-static unsigned char* VGA_BUFFER = (unsigned char*)0xA0000;
+#define WHITE COLOR(7, 7, 3)
+#define BLACK COLOR(0, 0, 0)
+
+static unsigned char* VGA_BUFFER = (u_8t*)0xA0000;
 
 /*
  * Initializes the screen and palette
@@ -23,7 +26,26 @@ void init_screen();
 /*
  * Clears the screen with the designated color
  */
-void clear_screen(unsigned char color);
+void clear_screen(u_8t color);
+
+/*
+ * Sets a pixel of the current buffer
+ */
+void set_pixel(u_16t x, u_16t y, u_8t color);
+
+/*
+ * Draws a rectangle at (x, y) with width w and height h
+ */
+void draw_rectangle(u_16t x, u_16t y, u_16t w, u_16t h, u_8t color);
+
+/*
+ * Draws a circle with center (x, y) with radius r
+ */
+void draw_circle(u_16t x, u_16t y, u_16t r, u_8t color);
+
+/*
+ *
+ */
 
 /*
  * Draws the current buffer

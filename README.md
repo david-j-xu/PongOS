@@ -20,4 +20,4 @@ If you are running on OSX (like me), the make won't run. So, you'll have to open
 
 ## Resources
 
-Nick Blundell's OS development guide as well as jdh's Tetris OS were very helpful resources!
+I used Nick Blundell's OS development guide, which helped a ton for getting the bootsector code to function. Additionally, jdh's Tetris OS was very helpful in figuring out creating the VGA driver and other graphical elements. Lastly, vladcc's Tetris OS helped a ton when it came to interrupt handling.
