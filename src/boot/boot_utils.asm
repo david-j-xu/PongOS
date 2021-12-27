@@ -17,9 +17,16 @@ print_char:
     int 0x10        ; interrupt to print character
     ret
 
+switch_vga_mode:
+    ; switches to graphics mode in VGA allowing for 320 x 200
+    mov ah, 0x00    ; set AH to set graphics mode
+    mov al, 0x13    ; 320 x 200 color mode
+    int 0x10        ; set mode
+    ret
+
 load_sectors:
     ; loads dh sectors after the boot sector from drive dl
-    push dx         ; save argument for error checking
+    push dx         ; save argument for error checkin
     mov ah, 0x02    ; set up for read
     mov al, dh      ; read dh sectors
     mov ch, 0x00    ; cylinder 0

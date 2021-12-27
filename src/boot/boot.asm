@@ -2,7 +2,7 @@
 [bits 16]
 [org 0x7c00] ; preconfigure offset of boot block
 
-main:
+boot_main:
     write:                      ; write booting status to screen
         mov bx, BOOT_MESSAGE    ; load string into source register
         call print_string       ; print the string
@@ -47,12 +47,15 @@ load_kernel:
 switch_to_pm:
     mov bx, PROTECTED_MODE_MESSAGE  ; Place status string
     call print_string               ; Print transition to 32 bit protected mode
+
+    call switch_vga_mode            ; switch VGA mode to graphics
+
     call pm_switch                  ; initiate switch to 32 bit protected mode
     hlt
 
 [bits 32]
 kernel_execute:
-    call clear_display          ; clear VGA display
+    ; call clear_display          ; clear VGA display
     call KERNEL_LOC             ; call into our kernel
     hlt                         ; hang if error occurred
 
@@ -66,7 +69,7 @@ KERNEL_LOAD_MESSAGE:
 PROTECTED_MODE_MESSAGE:
     db `Entering 32 bit protected mode...\n\r`, 0
 LOAD_NUM_SECTORS:
-    db 50                      ; load the next 50 sectors
+    db 53                      ; load the next 53 sectors
 
 ; Marking as bootable sector
 times 510-($-$$) db 0   ; padding

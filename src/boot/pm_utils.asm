@@ -30,7 +30,7 @@ print_string_pm:
         mov ah, WHITE_ON_BLACK  ; place settings into ah
         cmp al, 0x00            ; see if null
         je  .done               ; if so, complete the loop
-        mov [edx], eax             ; place correct value into video memory
+        mov [edx], eax          ; place correct value into video memory
         add ebx, 1              ; increment pointer in string
         add edx, 2              ; increment pointer in video memory
         jmp .loop
