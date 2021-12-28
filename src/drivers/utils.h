@@ -1,9 +1,14 @@
+/*
+ *  Utility functions
+ */
+
 #pragma once
 
 #define size_t unsigned int
 #define u_8t unsigned char
 #define u_16t unsigned short
 #define u_32t unsigned int
+#define u_64t unsigned long
 #define TRUE 1
 #define FALSE 0
 

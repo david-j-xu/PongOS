@@ -1,3 +1,7 @@
+/*
+ * Device driver for a VGA display
+ */
+
 #pragma once
 #include "io.h"
 #include "utils.h"
@@ -42,10 +46,6 @@ void draw_rectangle(u_16t x, u_16t y, u_16t w, u_16t h, u_8t color);
  * Draws a circle with center (x, y) with radius r
  */
 void draw_circle(u_16t x, u_16t y, u_16t r, u_8t color);
-
-/*
- *
- */
 
 /*
  * Draws the current buffer

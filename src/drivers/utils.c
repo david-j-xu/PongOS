@@ -26,7 +26,7 @@ int strlen(char* s) {
 u_8t dist_decision(int x1, int y1, int x2, int y2, int d) {
     int x = x2 - x1;
     int y = y2 - y1;
-    return (x * x + y * y <= d * d) ? TRUE : FALSE;
+    return !!(x * x + y * y <= d * d);
 }
 
 int min(int a, int b) { return a < b ? a : b; }
