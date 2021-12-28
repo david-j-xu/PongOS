@@ -8,6 +8,7 @@
 #include "utils.h"
 
 #define KBD_DATA 0x60
+#define KBD_INT 0x21
 
 #define KEY_LEFT 0x4B
 #define KEY_UP 0x48

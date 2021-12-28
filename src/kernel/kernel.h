@@ -7,6 +7,7 @@
 #include "../drivers/pic.h"
 #include "../drivers/screen.h"
 #include "../drivers/utils.h"
+#include "../drivers/pit.h"
 
 /*
  *  Main

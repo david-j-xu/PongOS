@@ -53,5 +53,4 @@ $(OBJDIR)kernel_linker.o: src/kernel/kernel_linker.asm
 # runs the os
 run: $(IMGDIR)$(IMAGE).img
 	qemu-system-i386 -drive format=raw,file=$^ \
-		-d int \
 		-monitor stdio

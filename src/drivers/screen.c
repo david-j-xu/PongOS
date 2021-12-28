@@ -1,7 +1,8 @@
 #include "screen.h"
 
+u_8t padding[SCREEN_SIZE];
 u_8t buffers[2][SCREEN_SIZE];
-u_8t curr_buffer = 0;
+u_8t curr_buffer = 1;
 
 void clear_screen(u_8t color) { memset(VGA_BUFFER, color, SCREEN_SIZE); }
 
@@ -23,7 +24,8 @@ void init_screen() {
     io_byte_write(VGA_CONTROL_DATA, 0x3F);
 
     /* clear buffers */
-    for (u_8t i = 0; i <= 2; i++) memset(buffers[i], NULL, SCREEN_SIZE);
+
+    for (u_8t i = 0; i < 2; i++) memset(buffers[i], NULL, SCREEN_SIZE);
 }
 
 static u_16t get_screen_pos(u_16t x, u_16t y) { return 320 * y + x; }
@@ -54,6 +56,7 @@ void draw_circle(u_16t x, u_16t y, u_16t r, u_8t color) {
 
 void draw() {
     memcpy(VGA_BUFFER, buffers[curr_buffer], SCREEN_SIZE);
+    memset(buffers[curr_buffer], 0, SCREEN_SIZE);
     /* swap buffers */
     curr_buffer = 1 - curr_buffer;
 }

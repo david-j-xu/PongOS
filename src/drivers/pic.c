@@ -1,11 +1,7 @@
 #include "pic.h"
 
-/* busy wait to allow IO time to work */
-static void io_wait() {
-    for (int i = 0; i < 50; i++) __asm__ volatile("nop");
-}
 void pic_init() {
-    u_8t pic1_mask = 0xFD;  // block all interrupts besides timer and keyboard
+    u_8t pic1_mask = 0xFC;  // block all interrupts besides timer and keyboard
     u_8t pic2_mask = 0xFF;  // block all interrupts
 
     /* initialize PICs */

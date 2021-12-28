@@ -155,3 +155,15 @@ void draw_string(u_16t x, u_16t y, char* s, u_8t color) {
         draw_char(x + CHAR_WIDTH * i, y, s[i], color);
     }
 }
+
+static char* HEX_TABLE = "0123456789ABCDEF";
+
+void draw_hex(u_16t x, u_16t y, u_32t s, u_8t color) {
+    int pos = 0;
+    while (s) {
+        u_8t curr = (s & 0xF0000000) >> 28;
+        draw_char(x + CHAR_WIDTH * pos, y, HEX_TABLE[curr], color);
+        pos++;
+        s = s << 4;
+    }
+}

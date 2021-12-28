@@ -15,5 +15,5 @@ void kb_irq_handler() {
 }
 
 void kb_init() {
-    install_irq_handler(0x21, FLAGS, IDT, (IRQ_HANDLER)kb_irq_handler);
+    install_irq_handler(KBD_INT, FLAGS, IDT, (IRQ_HANDLER)kb_irq_handler);
 }
