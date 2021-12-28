@@ -3,9 +3,9 @@
 Keyboard keyboard;
 
 void main() {
-    // idt_init(IDT);
+    idt_init(IDT);
     pic_init();
-    // kb_init();
+    kb_init();
     sti();
     init_screen();
     // cli();

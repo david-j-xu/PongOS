@@ -1,7 +1,5 @@
 #include "keyboard.h"
 
-#include "screen.h"
-
 extern Keyboard keyboard;
 
 void kb_irq_handler() {
@@ -11,8 +9,6 @@ void kb_irq_handler() {
     /* if key was pressed, set to 1. If released, set to 0 */
     keyboard.keys[scancode] = KEY_PRESSED(scancode);
     end_of_interrupt();
-    draw_circle(10, 10, 10, WHITE);
-    draw();
     __asm__ volatile("popa");
     __asm__ volatile("leave");
     __asm__ volatile("iret");

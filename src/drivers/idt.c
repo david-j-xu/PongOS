@@ -1,7 +1,5 @@
 #include "idt.h"
 
-#include "screen.h"
-
 static idt_entry idt[MAX_INTERRUPTS];
 static idt_p idt_pointer;
 
@@ -12,13 +10,11 @@ int idt_init(u_16t code_selector) {
     idt_pointer.base = (u_32t)&idt[0];
 
     /* install CPU interrupt handlers */
-    for (int i = 0; i < INTERRUPTS_IVT; ++i)
-        install_irq_handler(32 + i, FLAGS, code_selector, default_handler);
+    for (int i = 0; i < INTERRUPTS_IVT + 5; ++i)
+        install_irq_handler(32 + i, FLAGS, code_selector, &default_handler);
 
     /* install idt */
     idt_install();
-    draw_circle(10, 10, 40, WHITE);
-    draw();
 
     return 0;
 }
@@ -46,9 +42,6 @@ void install_irq_handler(u_32t i, u_8t flags, u_16t selector,
 void default_handler() {
     /* do nothing */
     __asm__ volatile("pusha");
-
-    draw_rectangle(10, 10, 10, 10, WHITE);
-    draw();
     end_of_interrupt();
     __asm__ volatile("popa");
     __asm__ volatile("leave");
