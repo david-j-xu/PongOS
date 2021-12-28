@@ -7,7 +7,7 @@ void idt_install() { __asm__ volatile("lidt %0" ::"m"(idt_pointer)); }
 
 int idt_init(u_16t code_selector) {
     idt_pointer.limit = sizeof(idt_entry) * MAX_INTERRUPTS - 1;
-    idt_pointer.base = (u_32t)&idt[0];
+    idt_pointer.base = (u_32t)&idt;
 
     /* install CPU interrupt handlers */
     for (int i = 0; i < INTERRUPTS_IVT; ++i)

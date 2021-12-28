@@ -6,8 +6,12 @@ void kb_irq_handler() {
     __asm__ volatile("pusha");
     u_16t scancode = (u_16t)io_byte_read(KBD_DATA);
 
+    /* set highbit */
+    int key_code = scancode & 0x7F;
+
     /* if key was pressed, set to 1. If released, set to 0 */
-    keyboard.keys[scancode] = KEY_PRESSED(scancode);
+    keyboard.keys[key_code] = KEY_PRESSED(scancode);
+
     end_of_interrupt();
     __asm__ volatile("popa");
     __asm__ volatile("leave");
