@@ -1,3 +1,7 @@
+/*
+ * Device driver for a VGA display
+ */
+
 #pragma once
 #include "io.h"
 #include "utils.h"

@@ -1,3 +1,7 @@
+/*
+ *  Utility functions
+ */
+
 #pragma once
 
 #define size_t unsigned int

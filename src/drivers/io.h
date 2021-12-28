@@ -1,3 +1,7 @@
+/*
+ * Defines useful helper functions for I/O
+ */
+
 #pragma once
 #include "utils.h"
 

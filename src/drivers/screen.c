@@ -29,8 +29,7 @@ void init_screen() {
 static u_16t get_screen_pos(u_16t x, u_16t y) { return 320 * y + x; }
 
 static u_8t in_bounds(u_16t x, u_16t y) {
-    return (x >= 0 && x < SCREEN_WIDTH && y >= 0 && y < SCREEN_HEIGHT) ? TRUE
-                                                                       : FALSE;
+    return !!(x >= 0 && x < SCREEN_WIDTH && y >= 0 && y < SCREEN_HEIGHT);
 }
 
 void set_pixel(u_16t x, u_16t y, u_8t color) {

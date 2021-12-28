@@ -1,3 +1,7 @@
+/*
+ * Defines fonts and helper functions to draw to screen
+ */
+
 #pragma once
 #include "screen.h"
 #include "utils.h"
