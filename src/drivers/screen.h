@@ -48,10 +48,6 @@ void draw_rectangle(u_16t x, u_16t y, u_16t w, u_16t h, u_8t color);
 void draw_circle(u_16t x, u_16t y, u_16t r, u_8t color);
 
 /*
- *
- */
-
-/*
  * Draws the current buffer
  */
 void draw();
