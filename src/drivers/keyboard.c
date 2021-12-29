@@ -21,3 +21,11 @@ void kb_irq_handler() {
 void kb_init() {
     install_irq_handler(KBD_INT, FLAGS, IDT, (IRQ_HANDLER)kb_irq_handler);
 }
+
+u_8t check_key(u_8t key) { return keyboard.keys[key]; }
+
+u_8t check_and_reset_key(u_8t key) {
+    u_8t state = keyboard.keys[key];
+    keyboard.keys[key] = 0;
+    return state;
+}

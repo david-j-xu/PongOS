@@ -46,10 +46,26 @@ void draw_rectangle(u_16t x, u_16t y, u_16t w, u_16t h, u_8t color) {
     }
 }
 
+void draw_rectangle_r(u_16t x, u_16t y, u_16t w, u_16t h) {
+    for (int i = x; i < x + w; i++) {
+        for (int j = y; j < y + h; j++) {
+            set_pixel(i, j, 70 + (i + (j / 2)) % 180);
+        }
+    }
+}
+
 void draw_circle(u_16t x, u_16t y, u_16t r, u_8t color) {
     for (int i = x - r; i <= x + r; i++) {
         for (int j = y - r; j <= y + r; j++) {
             if (dist_decision(i, j, x, y, r)) set_pixel(i, j, color);
+        }
+    }
+}
+
+void draw_circle_r(u_16t x, u_16t y, u_16t r) {
+    for (int i = x - r; i <= x + r; i++) {
+        for (int j = y - r; j <= y + r; j++) {
+            if (dist_decision(i, j, x, y, r)) draw_rectangle_r(i, j, 1, 1);
         }
     }
 }

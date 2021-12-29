@@ -2,7 +2,7 @@ CC = gcc
 CFLAGS = -m32 -ffreestanding
 
 # C source files
-SRCS = $(wildcard src/kernel/*.c) $(wildcard src/drivers/*.c)
+SRCS = $(wildcard src/kernel/*.c) $(wildcard src/drivers/*.c) $(wildcard src/pong/*.c)
 
 # object files list
 OBJDIR = build/
@@ -36,6 +36,10 @@ $(OBJDIR)%.o : src/kernel/%.c
 
 # creates object files
 $(OBJDIR)%.o : src/drivers/%.c
+	$(CC) $(CFLAGS) -c $^ -o $@
+
+# creates object files
+$(OBJDIR)%.o : src/pong/%.c
 	$(CC) $(CFLAGS) -c $^ -o $@
 
 # cleans build files and images
