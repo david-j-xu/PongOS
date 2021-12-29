@@ -167,3 +167,12 @@ void draw_hex(u_16t x, u_16t y, u_32t s, u_8t color) {
         s = s << 4;
     }
 }
+
+void draw_dec(u_16t x, u_16t y, u_8t s, u_8t color) {
+    int pos = 0;
+    do {
+        draw_char(x - CHAR_WIDTH * pos, y, HEX_TABLE[s % 10], color);
+        s /= 10;
+        pos++;
+    } while (s != 0);
+}
