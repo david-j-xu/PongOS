@@ -14,6 +14,8 @@
 #define KEY_W 0x11
 #define KEY_S 0x1F
 #define KEY_R 0x13
+#define KEY_P 0x19
+#define KEY_I 0x17
 #define KEY_UP 0x48
 #define KEY_DOWN 0x50
 
@@ -30,3 +32,9 @@ struct Keyboard {
 void kb_irq_handler();
 
 void kb_init();
+
+/* returns true if key is pressed */
+u_8t check_key(u_8t key);
+
+/* returns true if key is pressed and resets the key */
+u_8t check_and_reset_key(u_8t key);

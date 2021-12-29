@@ -33,6 +33,10 @@ int min(int a, int b) { return a < b ? a : b; }
 
 int max(int a, int b) { return a > b ? a : b; }
 
+int clamp(int x, int min_x, int max_x) { return max(min(x, max_x), min_x); }
+
+u_8t between(int x, int lo, int hi) { return (x >= lo && x <= hi); }
+
 void cli() { __asm__ volatile("cli"); }
 void sti() { __asm__ volatile("sti"); }
 void halt() { __asm__ volatile("hlt"); }

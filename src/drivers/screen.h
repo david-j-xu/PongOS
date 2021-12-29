@@ -43,9 +43,19 @@ void set_pixel(u_16t x, u_16t y, u_8t color);
 void draw_rectangle(u_16t x, u_16t y, u_16t w, u_16t h, u_8t color);
 
 /*
+ * Draws a rectangle at (x, y) with width w and height h in rainbow
+ */
+void draw_rectangle_r(u_16t x, u_16t y, u_16t w, u_16t h);
+
+/*
  * Draws a circle with center (x, y) with radius r
  */
 void draw_circle(u_16t x, u_16t y, u_16t r, u_8t color);
+
+/*
+ * Draws a circle with center (x, y) with radius r, in rainbow!
+ */
+void draw_circle_r(u_16t x, u_16t y, u_16t r);
 
 /*
  * Draws the current buffer

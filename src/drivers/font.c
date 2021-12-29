@@ -134,8 +134,6 @@ static const u_8t FONT[128][8] = {
     {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}   // U+007F
 };
 
-static int string_width(char* s) { return strlen(s) * CHAR_WIDTH; }
-
 void draw_char(u_16t x, u_16t y, char c, u_8t color) {
     const u_8t* character = FONT[c];
 
@@ -156,6 +154,58 @@ void draw_string(u_16t x, u_16t y, char* s, u_8t color) {
     }
 }
 
+void draw_big_char(u_16t x, u_16t y, char c, u_8t color, u_8t scale) {
+    const u_8t* character = FONT[c];
+
+    for (int i = x; i < min(x + scale * CHAR_WIDTH, SCREEN_WIDTH); i += scale) {
+        for (int j = y; j < min(y + scale * CHAR_WIDTH, SCREEN_HEIGHT);
+             j += scale) {
+            int x_offset = i - x;
+            int y_offset = j - y;
+            if (character[y_offset / scale] & (0x1 << (x_offset / scale))) {
+                draw_rectangle(i, j, scale, scale, color);
+            }
+        }
+    }
+}
+
+void draw_big_char_r(u_16t x, u_16t y, char c, u_8t scale) {
+    const u_8t* character = FONT[c];
+
+    for (int i = x; i < min(x + scale * CHAR_WIDTH, SCREEN_WIDTH); i += scale) {
+        for (int j = y; j < min(y + scale * CHAR_WIDTH, SCREEN_HEIGHT);
+             j += scale) {
+            int x_offset = i - x;
+            int y_offset = j - y;
+            if (character[y_offset / scale] & (0x1 << (x_offset / scale))) {
+                draw_rectangle_r(i, j, scale, scale);
+            }
+        }
+    }
+}
+
+void draw_big_string_r(u_16t x, u_16t y, char* s, u_8t scale) {
+    for (int i = 0; i < strlen(s); i++) {
+        draw_big_char_r(x + scale * CHAR_WIDTH * i, y, s[i], scale);
+    }
+}
+
+void draw_big_string(u_16t x, u_16t y, char* s, u_8t color, u_8t scale) {
+    for (int i = 0; i < strlen(s); i++) {
+        draw_big_char(x + scale * CHAR_WIDTH * i, y, s[i], color, scale);
+    }
+}
+
+void draw_big_string_c(u_16t y, char* s, u_8t color, u_8t scale) {
+    draw_big_string((SCREEN_WIDTH / 2) - (CHAR_WIDTH / 2) * scale * strlen(s),
+                    y, s, color, scale);
+}
+
+void draw_big_string_cr(u_16t y, char* s, u_8t scale) {
+    draw_big_string_r((SCREEN_WIDTH / 2) - (CHAR_WIDTH / 2) * scale * strlen(s),
+                      y, s, scale);
+}
+
 static char* HEX_TABLE = "0123456789ABCDEF";
 
 void draw_hex(u_16t x, u_16t y, u_32t s, u_8t color) {
@@ -172,6 +222,26 @@ void draw_dec(u_16t x, u_16t y, u_8t s, u_8t color) {
     int pos = 0;
     do {
         draw_char(x - CHAR_WIDTH * pos, y, HEX_TABLE[s % 10], color);
+        s /= 10;
+        pos++;
+    } while (s != 0);
+}
+
+void draw_big_dec(u_16t x, u_16t y, u_8t s, u_8t color, u_8t scale) {
+    int pos = 0;
+    do {
+        draw_big_char(x - scale * CHAR_WIDTH * pos, y, HEX_TABLE[s % 10], color,
+                      scale);
+        s /= 10;
+        pos++;
+    } while (s != 0);
+}
+
+void draw_big_dec_r(u_16t x, u_16t y, u_8t s, u_8t scale) {
+    int pos = 0;
+    do {
+        draw_big_char_r(x - scale * CHAR_WIDTH * pos, y, HEX_TABLE[s % 10],
+                        scale);
         s /= 10;
         pos++;
     } while (s != 0);
