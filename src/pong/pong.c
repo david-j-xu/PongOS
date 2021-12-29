@@ -147,7 +147,7 @@ static void render(Pong* game) {
         draw_big_dec_r(SCREEN_WIDTH / 3, 10, game->p1_score, 2);
         draw_big_dec_r(2 * SCREEN_WIDTH / 3, 10, game->p2_score, 2);
         /* draw ball */
-        draw_circle_r(game->ball.x, game->ball.y, BALL_RAD);
+        draw_circle(game->ball.x, game->ball.y, BALL_RAD, COLOR(7, 7, 2));
 
         /* draw paddles */
         draw_rectangle(game->p1_paddle.x, game->p1_paddle.y, PADDLE_WIDTH,
